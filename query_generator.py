@@ -1,6 +1,8 @@
 import anthropic
 import os
+from datetime import datetime
 
+timestamp=datetime.now().strftime("%Y-%m-%d-%H-%M") 
 try:
 	client=anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 except Exception as e:
@@ -32,3 +34,11 @@ result=generate_query(threat, siem)
 
 if result:	
 	print(result)
+	threat_report=f"query_{timestamp}.txt"
+	with open (threat_report, "w", encoding="utf-8") as f:
+		f.write(f"Threat: {threat}\n")
+		f.write(f"SIEM: {siem}\n")
+		f.write(f"Generated Query: {result}\n")
+		f.write(f"Timestamp: {timestamp}\n")
+		
+	print(f"Done! Report saved to {threat_report}")
