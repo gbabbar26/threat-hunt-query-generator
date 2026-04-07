@@ -34,11 +34,13 @@ result=generate_query(threat, siem)
 
 if result:	
 	print(result)
-	threat_report=f"query_{timestamp}.txt"
-	with open (threat_report, "w", encoding="utf-8") as f:
+	threat_report=f"query_history.txt"
+	with open (threat_report, "a", encoding="utf-8") as f:
 		f.write(f"Threat: {threat}\n")
 		f.write(f"SIEM: {siem}\n")
 		f.write(f"Generated Query: {result}\n")
 		f.write(f"Timestamp: {timestamp}\n")
+		f.write("\n" + "="*200 + "\n")
+
 		
 	print(f"Done! Report saved to {threat_report}")
