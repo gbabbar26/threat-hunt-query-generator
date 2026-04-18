@@ -59,7 +59,22 @@ print("Threat Hunt Query Generator")
 #asking for user inputs of threat and the siem they want to use
 
 threat = input("Describe the suspicious behaviour: ")
-siem=input("What SIEM tool do you want to use: Splunk, MS Sentinel, Elastic?")
+
+while True:
+
+	siem=input("What SIEM tool do you want to use: Splunk, MS Sentinel, Elastic?").lower()
+	if siem == "splunk":
+		siem="Splunk"
+		break
+	elif siem in [ "ms sentinel","sentinel"]:
+		siem = "MS Sentinel"
+		break
+	elif siem in ["elastic" , "elk"]:
+		siem = "Elastic"
+		break
+	else:
+		print('Please type in correct spelling: "Splunk", "MS Sentinel" or "Elastic" ?')
+		continue
 
 
 retry=0  #counter variable to track the number of attempts or retries made in case any error occurs
